@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,9 @@ import 'package:sizer/sizer.dart';
 
 import 'pages/home_page.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -35,10 +38,11 @@ class _MyAppState extends State<MyApp> {
       value: globalBloc!,
       child: Sizer(builder: (context, orientation, deviceType) {
         return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Pill Reminder',
           //theme customization
           theme: ThemeData(
-            primaryColor: Colors.black,
+            primaryColor: Colors.lightBlueAccent,
             scaffoldBackgroundColor: kScaffoldColor,
             //appbar theme
             appBarTheme: AppBarTheme(
@@ -46,7 +50,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.white,
               ),
               toolbarHeight: 7.h,
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.lightBlueAccent,
               iconTheme: IconThemeData(
                 color: Colors.white,
                 size: 20.sp,

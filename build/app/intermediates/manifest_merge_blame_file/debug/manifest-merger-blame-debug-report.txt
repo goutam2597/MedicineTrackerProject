@@ -5,7 +5,7 @@
 5    android:versionName="1.0.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="16"
+8        android:minSdkVersion="21"
 9        android:targetSdkVersion="33" />
 10    <!--
 11         The INTERNET permission is required for development. Specifically,
@@ -15,109 +15,305 @@
 15    <uses-permission android:name="android.permission.INTERNET" />
 15-->F:\Medicine-Reminder-main\android\app\src\debug\AndroidManifest.xml:7:5-66
 15-->F:\Medicine-Reminder-main\android\app\src\debug\AndroidManifest.xml:7:22-64
-16    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-16-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-81
-16-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-78
-17    <uses-permission android:name="android.permission.VIBRATE" />
-17-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-66
-17-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-63
-18    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-18-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-81
-18-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-78
-19    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-19-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-79
-19-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-76
-20    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-20-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-77
-20-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-74
-21
-22    <application
-23        android:name="android.app.Application"
-24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-24-->[androidx.core:core:1.6.0] C:\Users\gouta\.gradle\caches\transforms-3\acbce933e4b464a5224ed377a62db1f5\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
-25        android:debuggable="true"
-26        android:icon="@mipmap/ic_launcher"
-27        android:label="medicine_reminder" >
-28        <activity
-29            android:name="com.example.medicine_reminder.MainActivity"
-30            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-31            android:exported="true"
-32            android:hardwareAccelerated="true"
-33            android:launchMode="singleTop"
-34            android:theme="@style/LaunchTheme"
-35            android:windowSoftInputMode="adjustResize" >
+16    <uses-permission android:name="android.permission.VIBRATE" />
+16-->F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:62:5-66
+16-->F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:62:22-63
+17    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+17-->F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:63:5-81
+17-->F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:63:22-78
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:64:5-79
+18-->F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:64:22-76
+19    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+19-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-81
+19-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-78
+20    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+20-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-79
+20-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-76
+21    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+21-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-77
+21-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-74
+22    <!-- <uses-sdk android:minSdkVersion="14" /> -->
+23    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+23-->[com.google.firebase:firebase-firestore:24.7.1] C:\Users\gouta\.gradle\caches\transforms-3\bf322801133ab7f59ec932581d84cf9f\transformed\jetified-firebase-firestore-24.7.1\AndroidManifest.xml:10:5-79
+23-->[com.google.firebase:firebase-firestore:24.7.1] C:\Users\gouta\.gradle\caches\transforms-3\bf322801133ab7f59ec932581d84cf9f\transformed\jetified-firebase-firestore-24.7.1\AndroidManifest.xml:10:22-76
+24    <uses-permission android:name="android.permission.WAKE_LOCK" />
+24-->[com.google.android.gms:play-services-measurement-api:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\78872838e3df8414c67b5cd8f523fc0a\transformed\jetified-play-services-measurement-api-21.3.0\AndroidManifest.xml:24:5-68
+24-->[com.google.android.gms:play-services-measurement-api:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\78872838e3df8414c67b5cd8f523fc0a\transformed\jetified-play-services-measurement-api-21.3.0\AndroidManifest.xml:24:22-65
+25    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+25-->[com.google.android.gms:play-services-measurement-api:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\78872838e3df8414c67b5cd8f523fc0a\transformed\jetified-play-services-measurement-api-21.3.0\AndroidManifest.xml:25:5-79
+25-->[com.google.android.gms:play-services-measurement-api:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\78872838e3df8414c67b5cd8f523fc0a\transformed\jetified-play-services-measurement-api-21.3.0\AndroidManifest.xml:25:22-76
+26
+27    <uses-feature
+27-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:26:5-28:35
+28        android:glEsVersion="0x00020000"
+28-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:27:9-41
+29        android:required="true" />
+29-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:28:9-32
+30
+31    <queries>
+31-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:30:5-34:15
+32
+33        <!-- Needs to be explicitly declared on Android R+ -->
+34        <package android:name="com.google.android.apps.maps" />
+34-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:33:9-64
+34-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:33:18-61
+35    </queries>
 36
-37            <!--
-38                 Specifies an Android theme to apply to this Activity as soon as
-39                 the Android process has started. This theme is visible to the user
-40                 while the Flutter UI initializes. After that, this theme continues
-41                 to determine the Window background behind the Flutter UI.
-42            -->
-43            <meta-data
-44                android:name="io.flutter.embedding.android.NormalTheme"
-45                android:resource="@style/NormalTheme" />
-46
-47            <intent-filter>
-48                <action android:name="android.intent.action.MAIN" />
-49
-50                <category android:name="android.intent.category.LAUNCHER" />
-51            </intent-filter>
-52        </activity>
-53        <!--
-54             Don't delete the meta-data below.
-55             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-56        -->
-57        <meta-data
-58            android:name="flutterEmbedding"
-59            android:value="2" />
-60
-61        <receiver
-61-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:16:9-18:40
-62            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
-62-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-91
-63            android:exported="false" />
-63-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
-64        <receiver
-64-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-21:40
-65            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
-65-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-97
-66            android:exported="false" />
-66-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-37
-67        <receiver
-67-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:22:9-31:20
-68            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
-68-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-101
-69            android:exported="false" >
-69-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-37
-70            <intent-filter>
-70-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-30:29
-71                <action android:name="android.intent.action.BOOT_COMPLETED" />
-71-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:17-79
-71-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:25-76
-72                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-72-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:27:17-84
-72-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:27:25-81
-73                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-73-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:28:17-82
-73-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:28:25-79
-74                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-74-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-82
-74-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:29:25-79
-75            </intent-filter>
-76        </receiver>
-77
-78        <uses-library
-78-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\9dd2065205488e61baaf144579589300\transformed\jetified-window-1.0.0\AndroidManifest.xml:25:9-27:40
-79            android:name="androidx.window.extensions"
-79-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\9dd2065205488e61baaf144579589300\transformed\jetified-window-1.0.0\AndroidManifest.xml:26:13-54
-80            android:required="false" />
-80-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\9dd2065205488e61baaf144579589300\transformed\jetified-window-1.0.0\AndroidManifest.xml:27:13-37
-81        <uses-library
-81-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\9dd2065205488e61baaf144579589300\transformed\jetified-window-1.0.0\AndroidManifest.xml:28:9-30:40
-82            android:name="androidx.window.sidecar"
-82-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\9dd2065205488e61baaf144579589300\transformed\jetified-window-1.0.0\AndroidManifest.xml:29:13-51
-83            android:required="false" />
-83-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\9dd2065205488e61baaf144579589300\transformed\jetified-window-1.0.0\AndroidManifest.xml:30:13-37
-84    </application>
-85
-86</manifest>
+37    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+37-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:26:5-110
+37-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:26:22-107
+38
+39    <permission
+39-->[androidx.core:core:1.10.1] C:\Users\gouta\.gradle\caches\transforms-3\03629d148e2d574db4c4b1d2b4592075\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+40        android:name="com.example.medicine_reminder.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+40-->[androidx.core:core:1.10.1] C:\Users\gouta\.gradle\caches\transforms-3\03629d148e2d574db4c4b1d2b4592075\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+41        android:protectionLevel="signature" />
+41-->[androidx.core:core:1.10.1] C:\Users\gouta\.gradle\caches\transforms-3\03629d148e2d574db4c4b1d2b4592075\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+42
+43    <uses-permission android:name="com.example.medicine_reminder.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Permissions for Notifications -->
+43-->[androidx.core:core:1.10.1] C:\Users\gouta\.gradle\caches\transforms-3\03629d148e2d574db4c4b1d2b4592075\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+43-->[androidx.core:core:1.10.1] C:\Users\gouta\.gradle\caches\transforms-3\03629d148e2d574db4c4b1d2b4592075\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+44    <application
+45        android:name="android.app.Application"
+46        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+46-->[androidx.core:core:1.10.1] C:\Users\gouta\.gradle\caches\transforms-3\03629d148e2d574db4c4b1d2b4592075\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+47        android:debuggable="true"
+48        android:icon="@mipmap/ic_launcher"
+49        android:label="medicine_reminder" >
+50        <activity
+51            android:name="com.example.medicine_reminder.MainActivity"
+52            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+53            android:exported="true"
+54            android:hardwareAccelerated="true"
+55            android:launchMode="singleTop"
+56            android:theme="@style/LaunchTheme"
+57            android:windowSoftInputMode="adjustResize" >
+58
+59            <!--
+60                 Specifies an Android theme to apply to this Activity as soon as
+61                 the Android process has started. This theme is visible to the user
+62                 while the Flutter UI initializes. After that, this theme continues
+63                 to determine the Window background behind the Flutter UI.
+64            -->
+65            <meta-data
+66                android:name="io.flutter.embedding.android.NormalTheme"
+67                android:resource="@style/NormalTheme" />
+68
+69            <intent-filter>
+70                <action android:name="android.intent.action.MAIN" />
+71
+72                <category android:name="android.intent.category.LAUNCHER" />
+73            </intent-filter>
+74        </activity>
+75
+76        <!--
+77             Don't delete the meta-data below.
+78             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+79        -->
+80        <meta-data
+81            android:name="flutterEmbedding"
+82            android:value="2" />
+83        <meta-data
+84            android:name="com.google.android.geo.API_KEY"
+85            android:value="AIzaSyCHXtVv4TmbFB1iW26xv3N_zYq4QOh8s1A" />
+86
+87        <receiver
+88            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+89            android:exported="false" >
+89-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-37
+90            <intent-filter>
+91                <action android:name="android.intent.action.BOOT_COMPLETED" />
+91-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:17-79
+91-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:25-76
+92                <action android:name="android.intent.action.BOOT_COMPLETED" />
+92-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:17-79
+92-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:25-76
+93                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+93-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:27:17-84
+93-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:27:25-81
+94                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+94-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:28:17-82
+94-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:28:25-79
+95                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+95-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-82
+95-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:29:25-79
+96            </intent-filter>
+97            <intent-filter>
+97-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-30:29
+98                <action android:name="android.intent.action.BOOT_COMPLETED" />
+98-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:17-79
+98-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:26:25-76
+99                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+99-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:27:17-84
+99-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:27:25-81
+100                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+100-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:28:17-82
+100-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:28:25-79
+101                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+101-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-82
+101-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:29:25-79
+102            </intent-filter>
+103        </receiver>
+104        <receiver
+105            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+106            android:exported="false" />
+106-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-37
+107        ...
+108        <service
+108-->[:cloud_firestore] F:\Medicine-Reminder-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-14:19
+109            android:name="com.google.firebase.components.ComponentDiscoveryService"
+109-->[:cloud_firestore] F:\Medicine-Reminder-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:10:18-89
+110            android:directBootAware="true"
+110-->[com.google.firebase:firebase-common:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\76e44baad7d45ab6f1084c792533a8c2\transformed\jetified-firebase-common-20.3.3\AndroidManifest.xml:34:13-43
+111            android:exported="false" >
+111-->[com.google.firebase:firebase-analytics-ktx:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\af41fc23262b6f8f1ebbf50ed4197752\transformed\jetified-firebase-analytics-ktx-21.3.0\AndroidManifest.xml:10:13-37
+112            <meta-data
+112-->[:cloud_firestore] F:\Medicine-Reminder-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+113                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
+113-->[:cloud_firestore] F:\Medicine-Reminder-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-134
+114                android:value="com.google.firebase.components.ComponentRegistrar" />
+114-->[:cloud_firestore] F:\Medicine-Reminder-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+115            <meta-data
+115-->[:firebase_core] F:\Medicine-Reminder-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+116                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+116-->[:firebase_core] F:\Medicine-Reminder-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-124
+117                android:value="com.google.firebase.components.ComponentRegistrar" />
+117-->[:firebase_core] F:\Medicine-Reminder-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+118            <meta-data
+118-->[com.google.firebase:firebase-analytics-ktx:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\af41fc23262b6f8f1ebbf50ed4197752\transformed\jetified-firebase-analytics-ktx-21.3.0\AndroidManifest.xml:11:13-13:85
+119                android:name="com.google.firebase.components:com.google.firebase.analytics.ktx.FirebaseAnalyticsKtxRegistrar"
+119-->[com.google.firebase:firebase-analytics-ktx:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\af41fc23262b6f8f1ebbf50ed4197752\transformed\jetified-firebase-analytics-ktx-21.3.0\AndroidManifest.xml:12:17-126
+120                android:value="com.google.firebase.components.ComponentRegistrar" />
+120-->[com.google.firebase:firebase-analytics-ktx:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\af41fc23262b6f8f1ebbf50ed4197752\transformed\jetified-firebase-analytics-ktx-21.3.0\AndroidManifest.xml:13:17-82
+121            <meta-data
+121-->[com.google.firebase:firebase-common-ktx:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\1dc2c3ae21ee0cd90c2ece198472cbf7\transformed\jetified-firebase-common-ktx-20.3.3\AndroidManifest.xml:14:13-16:85
+122                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonKtxRegistrar"
+122-->[com.google.firebase:firebase-common-ktx:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\1dc2c3ae21ee0cd90c2ece198472cbf7\transformed\jetified-firebase-common-ktx-20.3.3\AndroidManifest.xml:15:17-113
+123                android:value="com.google.firebase.components.ComponentRegistrar" />
+123-->[com.google.firebase:firebase-common-ktx:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\1dc2c3ae21ee0cd90c2ece198472cbf7\transformed\jetified-firebase-common-ktx-20.3.3\AndroidManifest.xml:16:17-82
+124            <meta-data
+124-->[com.google.firebase:firebase-firestore:24.7.1] C:\Users\gouta\.gradle\caches\transforms-3\bf322801133ab7f59ec932581d84cf9f\transformed\jetified-firebase-firestore-24.7.1\AndroidManifest.xml:17:13-19:85
+125                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+125-->[com.google.firebase:firebase-firestore:24.7.1] C:\Users\gouta\.gradle\caches\transforms-3\bf322801133ab7f59ec932581d84cf9f\transformed\jetified-firebase-firestore-24.7.1\AndroidManifest.xml:18:17-111
+126                android:value="com.google.firebase.components.ComponentRegistrar" />
+126-->[com.google.firebase:firebase-firestore:24.7.1] C:\Users\gouta\.gradle\caches\transforms-3\bf322801133ab7f59ec932581d84cf9f\transformed\jetified-firebase-firestore-24.7.1\AndroidManifest.xml:19:17-82
+127            <meta-data
+127-->[com.google.android.gms:play-services-measurement-api:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\78872838e3df8414c67b5cd8f523fc0a\transformed\jetified-play-services-measurement-api-21.3.0\AndroidManifest.xml:31:13-33:85
+128                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+128-->[com.google.android.gms:play-services-measurement-api:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\78872838e3df8414c67b5cd8f523fc0a\transformed\jetified-play-services-measurement-api-21.3.0\AndroidManifest.xml:32:17-139
+129                android:value="com.google.firebase.components.ComponentRegistrar" />
+129-->[com.google.android.gms:play-services-measurement-api:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\78872838e3df8414c67b5cd8f523fc0a\transformed\jetified-play-services-measurement-api-21.3.0\AndroidManifest.xml:33:17-82
+130            <meta-data
+130-->[com.google.firebase:firebase-installations:17.1.4] C:\Users\gouta\.gradle\caches\transforms-3\661feeb19002fde45445f177b8204531\transformed\jetified-firebase-installations-17.1.4\AndroidManifest.xml:15:13-17:85
+131                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+131-->[com.google.firebase:firebase-installations:17.1.4] C:\Users\gouta\.gradle\caches\transforms-3\661feeb19002fde45445f177b8204531\transformed\jetified-firebase-installations-17.1.4\AndroidManifest.xml:16:17-127
+132                android:value="com.google.firebase.components.ComponentRegistrar" />
+132-->[com.google.firebase:firebase-installations:17.1.4] C:\Users\gouta\.gradle\caches\transforms-3\661feeb19002fde45445f177b8204531\transformed\jetified-firebase-installations-17.1.4\AndroidManifest.xml:17:17-82
+133        </service>
+134        <service
+134-->[:geolocator_android] F:\Medicine-Reminder-main\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-14:56
+135            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+135-->[:geolocator_android] F:\Medicine-Reminder-main\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-77
+136            android:enabled="true"
+136-->[:geolocator_android] F:\Medicine-Reminder-main\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-35
+137            android:exported="false"
+137-->[:geolocator_android] F:\Medicine-Reminder-main\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+138            android:foregroundServiceType="location" />
+138-->[:geolocator_android] F:\Medicine-Reminder-main\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-53
+139
+140        <receiver
+140-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:16:9-18:40
+141            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
+141-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-91
+142            android:exported="false" />
+142-->[:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
+143
+144        <activity
+144-->[:url_launcher_android] F:\Medicine-Reminder-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
+145            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+145-->[:url_launcher_android] F:\Medicine-Reminder-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+146            android:exported="false"
+146-->[:url_launcher_android] F:\Medicine-Reminder-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+147            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+147-->[:url_launcher_android] F:\Medicine-Reminder-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
+148
+149        <uses-library
+149-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\a3ca288e0ef39db20d1345585322d33e\transformed\jetified-window-1.0.0\AndroidManifest.xml:25:9-27:40
+150            android:name="androidx.window.extensions"
+150-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\a3ca288e0ef39db20d1345585322d33e\transformed\jetified-window-1.0.0\AndroidManifest.xml:26:13-54
+151            android:required="false" />
+151-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\a3ca288e0ef39db20d1345585322d33e\transformed\jetified-window-1.0.0\AndroidManifest.xml:27:13-37
+152        <uses-library
+152-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\a3ca288e0ef39db20d1345585322d33e\transformed\jetified-window-1.0.0\AndroidManifest.xml:28:9-30:40
+153            android:name="androidx.window.sidecar"
+153-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\a3ca288e0ef39db20d1345585322d33e\transformed\jetified-window-1.0.0\AndroidManifest.xml:29:13-51
+154            android:required="false" />
+154-->[androidx.window:window:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\a3ca288e0ef39db20d1345585322d33e\transformed\jetified-window-1.0.0\AndroidManifest.xml:30:13-37
+155
+156        <provider
+156-->[com.google.firebase:firebase-common:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\76e44baad7d45ab6f1084c792533a8c2\transformed\jetified-firebase-common-20.3.3\AndroidManifest.xml:25:9-30:39
+157            android:name="com.google.firebase.provider.FirebaseInitProvider"
+157-->[com.google.firebase:firebase-common:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\76e44baad7d45ab6f1084c792533a8c2\transformed\jetified-firebase-common-20.3.3\AndroidManifest.xml:26:13-77
+158            android:authorities="com.example.medicine_reminder.firebaseinitprovider"
+158-->[com.google.firebase:firebase-common:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\76e44baad7d45ab6f1084c792533a8c2\transformed\jetified-firebase-common-20.3.3\AndroidManifest.xml:27:13-72
+159            android:directBootAware="true"
+159-->[com.google.firebase:firebase-common:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\76e44baad7d45ab6f1084c792533a8c2\transformed\jetified-firebase-common-20.3.3\AndroidManifest.xml:28:13-43
+160            android:exported="false"
+160-->[com.google.firebase:firebase-common:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\76e44baad7d45ab6f1084c792533a8c2\transformed\jetified-firebase-common-20.3.3\AndroidManifest.xml:29:13-37
+161            android:initOrder="100" /> <!-- Needs to be explicitly declared on P+ -->
+161-->[com.google.firebase:firebase-common:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\76e44baad7d45ab6f1084c792533a8c2\transformed\jetified-firebase-common-20.3.3\AndroidManifest.xml:30:13-36
+162        <uses-library
+162-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:39:9-41:40
+163            android:name="org.apache.http.legacy"
+163-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:40:13-50
+164            android:required="false" />
+164-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\a87fdc620196a31233533ff4da07f31b\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:41:13-37
+165
+166        <activity
+166-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\e9715eab23a9c308f408e74f1b153ee8\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+167            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+167-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\e9715eab23a9c308f408e74f1b153ee8\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+168            android:exported="false"
+168-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\e9715eab23a9c308f408e74f1b153ee8\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+169            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+169-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\e9715eab23a9c308f408e74f1b153ee8\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+170
+171        <receiver
+171-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:29:9-33:20
+172            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+172-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:30:13-85
+173            android:enabled="true"
+173-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:31:13-35
+174            android:exported="false" >
+174-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:32:13-37
+175        </receiver>
+176
+177        <service
+177-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:35:9-38:40
+178            android:name="com.google.android.gms.measurement.AppMeasurementService"
+178-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:36:13-84
+179            android:enabled="true"
+179-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:37:13-35
+180            android:exported="false" />
+180-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:38:13-37
+181        <service
+181-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:39:9-43:72
+182            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+182-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:40:13-87
+183            android:enabled="true"
+183-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:41:13-35
+184            android:exported="false"
+184-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:42:13-37
+185            android:permission="android.permission.BIND_JOB_SERVICE" />
+185-->[com.google.android.gms:play-services-measurement:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\69c4806732777410023b4dc82fe813fc\transformed\jetified-play-services-measurement-21.3.0\AndroidManifest.xml:43:13-69
+186
+187        <meta-data
+187-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\bb3a9c1a42b5dd4017eecce365eb80e9\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+188            android:name="com.google.android.gms.version"
+188-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\bb3a9c1a42b5dd4017eecce365eb80e9\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+189            android:value="@integer/google_play_services_version" />
+189-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\gouta\.gradle\caches\transforms-3\bb3a9c1a42b5dd4017eecce365eb80e9\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+190    </application>
+191
+192</manifest>

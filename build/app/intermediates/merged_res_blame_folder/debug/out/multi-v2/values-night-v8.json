@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\Medicine-Reminder-main\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "com.example.medicine_reminder.app-mergeDebugResources-17:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "F:\\Medicine-Reminder-main\\android\\app\\src\\main\\res\\values-night\\styles.xml",
@@ -14,12 +14,12 @@
                         "endOffsets": "475,981"
                     },
                     "to": {
-                        "startLines": "2,7",
+                        "startLines": "2,6",
                         "startColumns": "4,4",
-                        "startOffsets": "55,363",
-                        "endLines": "6,9",
+                        "startOffsets": "55,236",
+                        "endLines": "5,8",
                         "endColumns": "12,12",
-                        "endOffsets": "358,527"
+                        "endOffsets": "231,400"
                     }
                 }
             ]

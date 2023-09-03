@@ -1,109 +1,203 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:medicine_reminder/constants.dart';
 import 'package:medicine_reminder/global_bloc.dart';
 import 'package:medicine_reminder/models/medicine.dart';
+import 'package:medicine_reminder/pages/drawer_screens/buy_medicine_online_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/medicine_donation_networks.dart';
+import 'package:medicine_reminder/pages/drawer_screens/medicine_tracker_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/nearby_medicine_store_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/price_tracker.dart';
 import 'package:medicine_reminder/pages/medicine_details/medicine_details.dart';
 import 'package:medicine_reminder/pages/new_entry/new_entry_page.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Medicine Tracker',style: TextStyle(color: Colors.white),),
+        title: const Text(
+          'Medicine Tracker',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
-      drawer: Drawer(
-        backgroundColor: Colors.white,
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 150,
-              child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                ),
-                child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center
-                  ,
-                  children: [
-                    Text(
-                      'Welcome',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24.0,
+      drawer: SafeArea(
+        child: Drawer(
+          backgroundColor: Colors.white,
+          child: Column(
+            children: <Widget>[
+              const SizedBox(
+                height: 150,
+                width: double.infinity,
+                child: DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Welcome',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24.0,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              title: const Text('Medicine Search',style: TextStyle(color: Colors.black),),
-              leading: const Icon(Icons.search,color: Colors.black,),
-              horizontalTitleGap: 0,
-              onTap: () {
-              },
-            ),
-            const Divider(thickness: 1,height: 8,),
-            ListTile(
-              title: const Text('Cost Tracker',style: TextStyle(color: Colors.black),),
-              leading: const Icon(Icons.currency_exchange_outlined,color: Colors.black,),
-              horizontalTitleGap: 0,
-              onTap: () {
-              },
-            ),
-            const Divider(thickness: 1,height: 8,),
-            ListTile(
-              title: const Text('Medicine Side Effects',style: TextStyle(color: Colors.black),),
-              leading: const Icon(Icons.error,color: Colors.black,),
-              horizontalTitleGap: 0,
-              onTap: () {
-              },
-            ),
-            const Divider(thickness: 1,height: 8,),
-            ListTile(
-              title: const Text('Nearby Medicine Shop',style: TextStyle(color: Colors.black),),
-              leading: const Icon(Icons.local_convenience_store,color: Colors.black,),
-              horizontalTitleGap: 0,
-              onTap: () {
-              },
-            ),
-            const Divider(thickness: 1,height: 8,),
-            ListTile(
-              title: const Text('Buy Medicine Online',style: TextStyle(color: Colors.black),),
-              leading: const Icon(Icons.local_grocery_store,color: Colors.black,),
-              horizontalTitleGap: 0,
-              onTap: () {
-              },
-            ),
-            const Divider(thickness: 1,height: 8,),
-            ListTile(
-              title: const Text('Medication Donation Network',style: TextStyle(color: Colors.black),),
-              leading: const FaIcon(FontAwesomeIcons.handHoldingMedical,color: Colors.black,),
-              horizontalTitleGap: 0,
-              onTap: () {
-              },
-            ),
-            const Divider(thickness: 1,height: 8,),
-            const SizedBox(height: 170,),
-            const Divider(thickness: 1,height: 8,),
-            ListTile(
-              title: const Text('About Us',style: TextStyle(color: Colors.black),),
-              leading: const Icon(Icons.info,color: Colors.black,),
-              horizontalTitleGap: 0,
-              onTap: () {
-              },
-
-            ),
-          ],
+              ListTile(
+                title: const Text(
+                  'Medicine Tracker',
+                  style: TextStyle(color: Colors.black54,),
+                ),
+                leading: const Icon(
+                  Icons.add_chart,
+                  color: Colors.lightBlue,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {
+                  Get.to(MedicineTrackerScreen());
+                },
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Medicine Search',
+                  style: TextStyle(color: Colors.black54,),
+                ),
+                leading: const Icon(
+                  Icons.search,
+                  color: Colors.lightBlue,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {},
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Price Tracker',
+                  style: TextStyle(color: Colors.black54,),
+                ),
+                leading: const Icon(
+                  Icons.currency_exchange_outlined,
+                  color: Colors.lightBlue,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {
+                  Get.to(const PriceTrackerScreen());
+                },
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Medicine Side Effects',
+                  style: TextStyle(color: Colors.black54,),
+                ),
+                leading: const Icon(
+                  Icons.error,
+                  color: Colors.lightBlue,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {},
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Nearby Medicine Shop',
+                  style: TextStyle(color: Colors.black54,),
+                ),
+                leading: const Icon(
+                  Icons.local_convenience_store,
+                  color: Colors.lightBlue,
+                ),
+                horizontalTitleGap: 0,
+                onTap: (){Get.to(const NearbyMedicineStoreScreen());}
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Buy Medicine Online',
+                  style: TextStyle(color: Colors.black54,),
+                ),
+                leading: const Icon(
+                  Icons.local_grocery_store,
+                  color: Colors.lightBlue,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {
+                  Get.to(BuyMedicineOnline());
+                },
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Medication Donation Network',
+                  style: TextStyle(color: Colors.black54,),
+                ),
+                leading: const FaIcon(
+                  FontAwesomeIcons.handHoldingMedical,
+                  color: Colors.lightBlue,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {Get.to(MedicineDonationNetworks());},
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              const Spacer(),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'About Us',
+                  style: TextStyle(color: Colors.lightBlue,),
+                ),
+                leading: const Icon(
+                  Icons.info,
+                  color: Colors.lightBlue,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {},
+              ),
+            ],
+          ),
         ),
       ),
       body: Padding(
@@ -121,8 +215,8 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        onPressed: (){
+        backgroundColor: Colors.lightBlue,
+        onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -130,7 +224,11 @@ class HomePage extends StatelessWidget {
             ),
           );
         },
-        child: const Icon(Icons.add,color: Colors.white,size: 30,),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 50,
+        ),
       ),
     );
   }
@@ -161,7 +259,8 @@ class TopContainer extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 1.h),
           child: const Text(
             'Welcome to Daily Dose.',
-            style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey,fontSize: 18),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18),
           ),
         ),
         SizedBox(
@@ -176,7 +275,10 @@ class TopContainer extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 1.h),
                 child: Text(
                   !snapshot.hasData ? '0' : snapshot.data!.length.toString(),
-                  style: const TextStyle(fontSize: 50,color: Colors.black,fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 50,
+                      color: Colors.lightBlue,
+                      fontWeight: FontWeight.bold),
                 ),
               );
             }),
@@ -190,7 +292,6 @@ class BottomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final GlobalBloc globalBloc = Provider.of<GlobalBloc>(context);
 
     return StreamBuilder(
@@ -231,15 +332,14 @@ class MedicineCard extends StatelessWidget {
   const MedicineCard({Key? key, required this.medicine}) : super(key: key);
   final Medicine medicine;
 
-
   Hero makeIcon(double size) {
-
     if (medicine.medicineType == 'Bottle') {
       return Hero(
         tag: medicine.medicineName! + medicine.medicineType!,
         child: SvgPicture.asset(
           'assets/icons/bottle.svg',
           height: 7.h,
+          color: Colors.lightBlue,
         ),
       );
     } else if (medicine.medicineType == 'Pill') {
@@ -248,6 +348,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/pill.svg',
           height: 7.h,
+          color: Colors.lightBlue,
         ),
       );
     } else if (medicine.medicineType == 'Syringe') {
@@ -256,6 +357,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/syringe.svg',
           height: 7.h,
+          color: Colors.lightBlue,
         ),
       );
     } else if (medicine.medicineType == 'Tablet') {
@@ -264,6 +366,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/tablet.svg',
           height: 7.h,
+          color: Colors.lightBlue,
         ),
       );
     }
@@ -283,7 +386,6 @@ class MedicineCard extends StatelessWidget {
       highlightColor: Colors.white,
       splashColor: Colors.grey,
       onTap: () {
-
         Navigator.of(context).push(
           PageRouteBuilder<void>(
             pageBuilder: (BuildContext context, Animation<double> animation,

@@ -23,11 +23,14 @@ class NewEntryPage extends StatefulWidget {
 }
 
 class _NewEntryPageState extends State<NewEntryPage> {
+
+  BuildContext? _scaffoldContext;
   late TextEditingController nameController;
   late TextEditingController dosageController;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   late NewEntryBloc _newEntryBloc;
   late GlobalKey<ScaffoldState> _scaffoldKey;
+
 
   @override
   void dispose() {
@@ -51,6 +54,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
 
   @override
   Widget build(BuildContext context) {
+    _scaffoldContext = context;
     final GlobalBloc globalBloc = Provider.of<GlobalBloc>(context);
     return Scaffold(
       key: _scaffoldKey,
@@ -288,16 +292,27 @@ class _NewEntryPageState extends State<NewEntryPage> {
     return ids;
   }
 
-  initializeNotifications() async {
-    var initializationSettingsAndroid =
-        const AndroidInitializationSettings('@mipmap/launcher_icon');
+  Future<void> initializeNotifications() async {
+    const AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    var initializationSettingsIOS = const DarwinInitializationSettings();
-    var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    const InitializationSettings initializationSettings =
+    InitializationSettings(
+      android: initializationSettingsAndroid,
+    );
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    try {
+      await flutterLocalNotificationsPlugin.initialize(
+        initializationSettings,
+      );
+      print("Notifications initialized successfully.");
+    } catch (e) {
+      print("Error initializing notifications: $e");
+    }
   }
+
+
+
 
   Future onSelectNotification(String? payload) async {
     if (payload != null) {
@@ -340,13 +355,20 @@ class _NewEntryPageState extends State<NewEntryPage> {
             : 'It is time to take your medicine, according to schedule',
         scheduledDate,
         platformChannelSpecifics,
-        androidAllowWhileIdle: true,
+        androidScheduleMode: AndroidScheduleMode.alarmClock,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
       );
 
       scheduledDate = scheduledDate.add(Duration(hours: medicine.interval!));
+    }
+    final snackBar = SnackBar(
+      content: Text('Scheduled notifications for ${medicine.medicineName}'),
+      duration: const Duration(seconds: 10), // Adjust the duration as needed
+    );
+    if (_scaffoldContext != null) {
+      ScaffoldMessenger.of(_scaffoldContext!).showSnackBar(snackBar);
     }
   }
 }
@@ -362,7 +384,7 @@ class _SelectTimeState extends State<SelectTime> {
   TimeOfDay _time = const TimeOfDay(hour: 0, minute: 00);
   bool _clicked = false;
 
-  Future<TimeOfDay> _selectTime() async {
+  Future<TimeOfDay?> _selectTime() async {
     final NewEntryBloc newEntryBloc =
         Provider.of<NewEntryBloc>(context, listen: false);
 
@@ -379,7 +401,7 @@ class _SelectTimeState extends State<SelectTime> {
             convertTime(_time.minute.toString()));
       });
     }
-    return picked!;
+    return picked;
   }
 
   @override
@@ -435,7 +457,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.bold,
-              color: Colors.black
+              color: Colors.lightBlue,
             ),
           ),
           DropdownButton(
@@ -447,7 +469,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
                     'Select an Interval',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.black,
+                      color: Colors.red,
                       fontWeight: FontWeight.bold
                     ),
                   )
@@ -481,7 +503,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
             style: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
-                color: Colors.black
+                color: Colors.lightBlue,
             ),
           ),
         ],
@@ -575,7 +597,7 @@ class PanelTitle extends StatelessWidget {
               text: title,
               style: const TextStyle(
                 fontSize: 14,
-                color: Colors.black,
+                color: Colors.lightBlue,
                 fontWeight: FontWeight.bold
               ),
             ),
