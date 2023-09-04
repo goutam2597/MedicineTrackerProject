@@ -8,14 +8,14 @@ class MedicineDonationNetworks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Medicine Donation Networks'),),
+      appBar: AppBar(title: const Text('Medicine Donation Networks'),),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 24,right: 24,top: 24),
             child: GestureDetector(
               onTap: (){
-                Get.to(YibWebView());
+                Get.to(const YibWebView());
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -31,7 +31,7 @@ class MedicineDonationNetworks extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 200,
                     width: double.infinity,
                     child: ClipRRect(

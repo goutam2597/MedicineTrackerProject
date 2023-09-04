@@ -4,10 +4,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medicine_reminder/constants.dart';
 import 'package:medicine_reminder/global_bloc.dart';
+import 'package:medicine_reminder/pages/bottom_nav_base.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-import 'pages/home_page.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,15 +41,15 @@ class _MyAppState extends State<MyApp> {
           title: 'Pill Reminder',
           //theme customization
           theme: ThemeData(
-            primaryColor: Colors.lightBlueAccent,
-            scaffoldBackgroundColor: kScaffoldColor,
+            primaryColor: kPrimaryColor,
+            scaffoldBackgroundColor: Colors.white,
             //appbar theme
             appBarTheme: AppBarTheme(
               actionsIconTheme: const IconThemeData(
                 color: Colors.white,
               ),
               toolbarHeight: 7.h,
-              backgroundColor: Colors.lightBlueAccent,
+              backgroundColor: kPrimaryColor,
               iconTheme: IconThemeData(
                 color: Colors.white,
                 size: 20.sp,
@@ -78,17 +77,17 @@ class _MyAppState extends State<MyApp> {
                 fontWeight: FontWeight.w900,
                 color: kTextColor,
               ),
-              titleLarge: GoogleFonts.poppins(
+              titleLarge: GoogleFonts.rubik(
                 fontSize: 13.sp,
                 color: kTextColor,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 1.0,
               ),
               titleMedium:
-                  GoogleFonts.poppins(fontSize: 15.sp, color: kPrimaryColor),
+                  GoogleFonts.rubik(fontSize: 15.sp, color: kPrimaryColor),
               titleSmall:
-                  GoogleFonts.poppins(fontSize: 12.sp, color: kTextLightColor),
-              bodySmall: GoogleFonts.poppins(
+                  GoogleFonts.rubik(fontSize: 12.sp, color: kTextLightColor),
+              bodySmall: GoogleFonts.rubik(
                 fontSize: 9.sp,
                 fontWeight: FontWeight.w400,
                 color: kTextLightColor,
@@ -99,19 +98,14 @@ class _MyAppState extends State<MyApp> {
                 color: kTextColor,
               ),
             ),
-            inputDecorationTheme: const InputDecorationTheme(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kTextLightColor,
-                  width: 0.7,
-                ),
-              ),
-              border: UnderlineInputBorder(
-                borderSide: BorderSide(color: kTextLightColor),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: kPrimaryColor),
-              ),
+            inputDecorationTheme: InputDecorationTheme(
+              filled: true,
+              fillColor: Colors.white,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              border: OutlineInputBorder(borderSide: const BorderSide(color: kPrimaryColor),borderRadius: BorderRadius.circular(8)),
+              outlineBorder: const BorderSide(color: kPrimaryColor),
+              enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: kPrimaryColor,width: 2),borderRadius: BorderRadius.circular(10)),
+              focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: kPrimaryColor,width: 2))
             ),
             //lets customize the timePicker theme
             timePickerTheme: TimePickerThemeData(
@@ -128,8 +122,18 @@ class _MyAppState extends State<MyApp> {
                 fontSize: 8.sp,
               ),
             ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: kPrimaryColor,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
           ),
-          home: const HomePage(),
+          home: const BottomNavBaseScreen(),
         );
       }),
     );

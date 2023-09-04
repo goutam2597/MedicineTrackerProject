@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medicine_reminder/constants.dart';
 import 'package:medicine_reminder/global_bloc.dart';
 import 'package:medicine_reminder/models/medicine.dart';
@@ -11,7 +12,6 @@ import 'package:medicine_reminder/pages/drawer_screens/medicine_tracker_screen.d
 import 'package:medicine_reminder/pages/drawer_screens/nearby_medicine_store_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/price_tracker.dart';
 import 'package:medicine_reminder/pages/medicine_details/medicine_details.dart';
-import 'package:medicine_reminder/pages/new_entry/new_entry_page.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -24,15 +24,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Medicine Tracker',
-          style: TextStyle(color: Colors.white),
+          style: GoogleFonts.rubik(textStyle: const TextStyle(color: Colors.white, fontSize: 23)),
         ),
         centerTitle: true,
+        backgroundColor: const Color(0xff45B3CB),
+        elevation: 2,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(onPressed: (){}, icon: const FaIcon(FontAwesomeIcons.magnifyingGlass,size: 23,)),
+          ),
+        ],
       ),
       drawer: SafeArea(
         child: Drawer(
@@ -44,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 width: double.infinity,
                 child: DrawerHeader(
                   decoration: BoxDecoration(
-                    color: Colors.lightBlue,
+                    color: kPrimaryColor,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,15 +73,17 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 title: const Text(
                   'Medicine Tracker',
-                  style: TextStyle(color: Colors.black54,),
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
                 leading: const Icon(
                   Icons.add_chart,
-                  color: Colors.lightBlue,
+                  color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(MedicineTrackerScreen());
+                  Get.to(const MedicineTrackerScreen());
                 },
               ),
               const Divider(
@@ -82,11 +93,13 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 title: const Text(
                   'Medicine Search',
-                  style: TextStyle(color: Colors.black54,),
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
                 leading: const Icon(
                   Icons.search,
-                  color: Colors.lightBlue,
+                  color: kPrimaryColor
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {},
@@ -98,11 +111,13 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 title: const Text(
                   'Price Tracker',
-                  style: TextStyle(color: Colors.black54,),
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
                 leading: const Icon(
                   Icons.currency_exchange_outlined,
-                  color: Colors.lightBlue,
+                  color: kPrimaryColor
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
@@ -116,11 +131,13 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 title: const Text(
                   'Medicine Side Effects',
-                  style: TextStyle(color: Colors.black54,),
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
                 leading: const Icon(
                   Icons.error,
-                  color: Colors.lightBlue,
+                  color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {},
@@ -130,17 +147,20 @@ class _HomePageState extends State<HomePage> {
                 height: 8,
               ),
               ListTile(
-                title: const Text(
-                  'Nearby Medicine Shop',
-                  style: TextStyle(color: Colors.black54,),
-                ),
-                leading: const Icon(
-                  Icons.local_convenience_store,
-                  color: Colors.lightBlue,
-                ),
-                horizontalTitleGap: 0,
-                onTap: (){Get.to(const NearbyMedicineStoreScreen());}
-              ),
+                  title: const Text(
+                    'Nearby Medicine Shop',
+                    style: TextStyle(
+                      color: Colors.black54,
+                    ),
+                  ),
+                  leading: const Icon(
+                    Icons.local_convenience_store,
+                    color:kPrimaryColor,
+                  ),
+                  horizontalTitleGap: 0,
+                  onTap: () {
+                    Get.to(const NearbyMedicineStoreScreen());
+                  }),
               const Divider(
                 thickness: 1,
                 height: 8,
@@ -148,15 +168,17 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 title: const Text(
                   'Buy Medicine Online',
-                  style: TextStyle(color: Colors.black54,),
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
                 leading: const Icon(
                   Icons.local_grocery_store,
-                  color: Colors.lightBlue,
+                  color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(BuyMedicineOnline());
+                  Get.to(const BuyMedicineOnline());
                 },
               ),
               const Divider(
@@ -166,14 +188,18 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 title: const Text(
                   'Medication Donation Network',
-                  style: TextStyle(color: Colors.black54,),
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
                 leading: const FaIcon(
                   FontAwesomeIcons.handHoldingMedical,
-                  color: Colors.lightBlue,
+                  color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
-                onTap: () {Get.to(MedicineDonationNetworks());},
+                onTap: () {
+                  Get.to(const MedicineDonationNetworks());
+                },
               ),
               const Divider(
                 thickness: 1,
@@ -187,11 +213,13 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 title: const Text(
                   'About Us',
-                  style: TextStyle(color: Colors.lightBlue,),
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                  ),
                 ),
                 leading: const Icon(
                   Icons.info,
-                  color: Colors.lightBlue,
+                  color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {},
@@ -214,22 +242,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.lightBlue,
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const NewEntryPage(),
-            ),
-          );
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-          size: 50,
-        ),
-      ),
     );
   }
 }
@@ -248,10 +260,14 @@ class TopContainer extends StatelessWidget {
           padding: EdgeInsets.only(
             bottom: 1.h,
           ),
-          child: Text(
+          child: const Text(
             'Worry less. \nLive healthier.',
             textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: TextStyle(
+              color: kPrimaryColor,
+              fontSize: 35,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         Container(
@@ -260,7 +276,9 @@ class TopContainer extends StatelessWidget {
           child: const Text(
             'Welcome to Daily Dose.',
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 18),
+                fontWeight: FontWeight.bold,
+                color: Colors.black54,
+                fontSize: 18),
           ),
         ),
         SizedBox(
@@ -277,7 +295,7 @@ class TopContainer extends StatelessWidget {
                   !snapshot.hasData ? '0' : snapshot.data!.length.toString(),
                   style: const TextStyle(
                       fontSize: 50,
-                      color: Colors.lightBlue,
+                      color: kPrimaryColor,
                       fontWeight: FontWeight.bold),
                 ),
               );
@@ -339,7 +357,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/bottle.svg',
           height: 7.h,
-          color: Colors.lightBlue,
+          color: kPrimaryColor,
         ),
       );
     } else if (medicine.medicineType == 'Pill') {
@@ -348,7 +366,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/pill.svg',
           height: 7.h,
-          color: Colors.lightBlue,
+          color: kPrimaryColor,
         ),
       );
     } else if (medicine.medicineType == 'Syringe') {
@@ -357,7 +375,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/syringe.svg',
           height: 7.h,
-          color: Colors.lightBlue,
+          color: kPrimaryColor,
         ),
       );
     } else if (medicine.medicineType == 'Tablet') {
@@ -366,7 +384,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/tablet.svg',
           height: 7.h,
-          color: Colors.lightBlue,
+          color: kPrimaryColor,
         ),
       );
     }
@@ -408,7 +426,7 @@ class MedicineCard extends StatelessWidget {
         padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 1.h, bottom: 1.h),
         margin: EdgeInsets.all(1.h),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: sBgColor,
           borderRadius: BorderRadius.circular(2.h),
         ),
         child: Column(

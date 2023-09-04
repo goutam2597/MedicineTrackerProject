@@ -8,14 +8,14 @@ class BuyMedicineOnline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Buy Medicine Online'),),
+      appBar: AppBar(title: const Text('Buy Medicine Online'),),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 24,right: 24,top: 24),
             child: GestureDetector(
               onTap: (){
-                Get.to(AroggaWebView());
+                Get.to(const AroggaWebView());
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -31,7 +31,7 @@ class BuyMedicineOnline extends StatelessWidget {
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 200,
                     width: double.infinity,
                     child: ClipRRect(

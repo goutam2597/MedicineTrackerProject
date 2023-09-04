@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medicine_reminder/constants.dart';
 import 'package:medicine_reminder/global_bloc.dart';
 import 'package:medicine_reminder/models/errors.dart';
@@ -23,14 +25,12 @@ class NewEntryPage extends StatefulWidget {
 }
 
 class _NewEntryPageState extends State<NewEntryPage> {
-
   BuildContext? _scaffoldContext;
   late TextEditingController nameController;
   late TextEditingController dosageController;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   late NewEntryBloc _newEntryBloc;
   late GlobalKey<ScaffoldState> _scaffoldKey;
-
 
   @override
   void dispose() {
@@ -62,118 +62,156 @@ class _NewEntryPageState extends State<NewEntryPage> {
       appBar: AppBar(
         title: const Text('Add New'),
       ),
-      body: Provider<NewEntryBloc>.value(
-        value: _newEntryBloc,
-        child: Padding(
-          padding: EdgeInsets.all(2.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const PanelTitle(
-                title: 'Medicine Name',
-                isRequired: true,
-              ),
-              TextFormField(
-                maxLength: 12,
-                controller: nameController,
-                textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Provider<NewEntryBloc>.value(
+          value: _newEntryBloc,
+          child: Padding(
+            padding: EdgeInsets.all(2.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Medicine Name',
+                    style: GoogleFonts.rubik(
+                      textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: kPrimaryColor),
+                    ),),
+                const SizedBox(
+                  height: 5,
                 ),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(color: kOtherColor),
-              ),
-              const PanelTitle(
-                title: 'Dosage in mg',
-                isRequired: false,
-              ),
-              TextFormField(
-                maxLength: 12,
-                controller: dosageController,
-                textCapitalization: TextCapitalization.words,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
+                TextFormField(
+                  maxLength: 12,
+                  controller: nameController,
+                  textCapitalization: TextCapitalization.words,
+                  decoration: const InputDecoration(hintText: 'Name'),
+                  style: const TextStyle(fontSize: 18),
                 ),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(color: kOtherColor),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              const PanelTitle(title: 'Medicine Type', isRequired: false),
-              Padding(
-                padding: EdgeInsets.only(top: 1.h),
-                child: StreamBuilder<MedicineType>(
-                  //new entry block
-                  stream: _newEntryBloc.selectedMedicineType,
-                  builder: (context, snapshot) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //not yet clickable?
-                        MedicineTypeColumn(
-                            medicineType: MedicineType.Bottle,
-                            name: 'Bottle',
-                            iconValue: 'assets/icons/bottle.svg',
-                            isSelected: snapshot.data == MedicineType.Bottle
-                                ? true
-                                : false),
-                        MedicineTypeColumn(
-                            medicineType: MedicineType.Pill,
-                            name: 'Pill',
-                            iconValue: 'assets/icons/pill.svg',
-                            isSelected: snapshot.data == MedicineType.Pill
-                                ? true
-                                : false),
-                        MedicineTypeColumn(
-                            medicineType: MedicineType.Syringe,
-                            name: 'Syringe',
-                            iconValue: 'assets/icons/syringe.svg',
-                            isSelected: snapshot.data == MedicineType.Syringe
-                                ? true
-                                : false),
-                        MedicineTypeColumn(
-                            medicineType: MedicineType.Tablet,
-                            name: 'Tablet',
-                            iconValue: 'assets/icons/tablet.svg',
-                            isSelected: snapshot.data == MedicineType.Tablet
-                                ? true
-                                : false),
-                      ],
-                    );
-                  },
+                Text('Strength',
+                    style: GoogleFonts.rubik(
+                      textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: kPrimaryColor),
+                    )),
+                const SizedBox(
+                  height: 5,
                 ),
-              ),
-              const PanelTitle(title: 'Interval Selection', isRequired: true),
-              const IntervalSelection(),
-              const PanelTitle(title: 'Starting Time', isRequired: true),
-              const SelectTime(),
-              SizedBox(
-                height: 2.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 8.w,
-                  right: 8.w,
+                TextFormField(
+                  maxLength: 12,
+                  controller: dosageController,
+                  textCapitalization: TextCapitalization.words,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(hintText: 'Dosage in mg'),
+                  style: const TextStyle(fontSize: 18),
                 ),
-                child: SizedBox(
+                Text('Monthly Dose',
+                    style: GoogleFonts.rubik(
+                      textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: kPrimaryColor),
+                    )),
+                const SizedBox(
+                  height: 5,
+                ),
+                TextFormField(
+                  maxLength: 12,
+                  textCapitalization: TextCapitalization.words,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(hintText: 'Dose Count'),
+                  style: const TextStyle(fontSize: 18),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text('Medicine Type',
+                    style: GoogleFonts.rubik(
+                      textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: kPrimaryColor),
+                    )),
+                Padding(
+                  padding: EdgeInsets.only(top: 1.h),
+                  child: StreamBuilder<MedicineType>(
+                    stream: _newEntryBloc.selectedMedicineType,
+                    builder: (context, snapshot) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          //not yet clickable?
+                          MedicineTypeColumn(
+                              medicineType: MedicineType.Bottle,
+                              name: 'Bottle',
+                              iconValue: 'assets/icons/bottle.svg',
+                              isSelected: snapshot.data == MedicineType.Bottle
+                                  ? true
+                                  : false),
+                          MedicineTypeColumn(
+                              medicineType: MedicineType.Pill,
+                              name: 'Pill',
+                              iconValue: 'assets/icons/pill.svg',
+                              isSelected: snapshot.data == MedicineType.Pill
+                                  ? true
+                                  : false),
+                          MedicineTypeColumn(
+                              medicineType: MedicineType.Syringe,
+                              name: 'Syringe',
+                              iconValue: 'assets/icons/syringe.svg',
+                              isSelected: snapshot.data == MedicineType.Syringe
+                                  ? true
+                                  : false),
+                          MedicineTypeColumn(
+                              medicineType: MedicineType.Tablet,
+                              name: 'Tablet',
+                              iconValue: 'assets/icons/tablet.svg',
+                              isSelected: snapshot.data == MedicineType.Tablet
+                                  ? true
+                                  : false),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text('Interval Selection',
+                    style: GoogleFonts.rubik(
+                      textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: kPrimaryColor),
+                    )),
+                const IntervalSelection(),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text('Starting Time',
+                    style: GoogleFonts.rubik(
+                      textStyle: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: kPrimaryColor),
+                    )),
+                const SelectTime(),
+                SizedBox(
+                  height: 2.h,
+                ),
+                SizedBox(
                   height: 50,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: kPrimaryColor,
-                      shape: const StadiumBorder(),
-                    ),
+                  width: double.infinity,
+                  child: ElevatedButton(
                     child: Center(
                       child: Text(
                         'Confirm',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              color: kScaffoldColor,
-                            ),
+                        style: GoogleFonts.rubik(
+                          textStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
                     onPressed: () {
@@ -241,8 +279,8 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     },
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -274,11 +312,17 @@ class _NewEntryPageState extends State<NewEntryPage> {
   }
 
   void displayError(String error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: kOtherColor,
-        content: Text(error),
-        duration: const Duration(milliseconds: 2000),
+    Get.snackbar(
+      'Ops!',
+      'Error.',
+      colorText: kSnackBarColor,
+      messageText: Text(
+        error,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: kSnackBarColor,
+        ),
       ),
     );
   }
@@ -294,10 +338,10 @@ class _NewEntryPageState extends State<NewEntryPage> {
 
   Future<void> initializeNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const InitializationSettings initializationSettings =
-    InitializationSettings(
+        InitializationSettings(
       android: initializationSettingsAndroid,
     );
 
@@ -310,9 +354,6 @@ class _NewEntryPageState extends State<NewEntryPage> {
       print("Error initializing notifications: $e");
     }
   }
-
-
-
 
   Future onSelectNotification(String? payload) async {
     if (payload != null) {
@@ -363,15 +404,24 @@ class _NewEntryPageState extends State<NewEntryPage> {
 
       scheduledDate = scheduledDate.add(Duration(hours: medicine.interval!));
     }
-    final snackBar = SnackBar(
-      content: Text('Scheduled notifications for ${medicine.medicineName}'),
-      duration: const Duration(seconds: 10), // Adjust the duration as needed
-    );
     if (_scaffoldContext != null) {
-      ScaffoldMessenger.of(_scaffoldContext!).showSnackBar(snackBar);
+      Get.snackbar(
+        'Congratulations!',
+        'Scheduled notifications for ${medicine.medicineName}',
+        colorText: kPrimaryColor,
+        messageText: Text(
+          'Scheduled notifications for ${medicine.medicineName}',
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: kPrimaryColor,
+          ),
+        ),
+      );
     }
   }
 }
+
 
 class SelectTime extends StatefulWidget {
   const SelectTime({Key? key}) : super(key: key);
@@ -410,9 +460,7 @@ class _SelectTimeState extends State<SelectTime> {
       height: 8.h,
       child: Padding(
         padding: EdgeInsets.only(top: 2.h),
-        child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: kPrimaryColor, shape: const StadiumBorder()),
+        child: ElevatedButton(
           onPressed: () {
             _selectTime();
           },
@@ -421,10 +469,12 @@ class _SelectTimeState extends State<SelectTime> {
               _clicked == false
                   ? "Select Time"
                   : "${convertTime(_time.hour.toString())}:${convertTime(_time.minute.toString())}",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(color: kScaffoldColor),
+              style: GoogleFonts.rubik(
+                textStyle: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
+              ),
             ),
           ),
         ),
@@ -452,12 +502,13 @@ class _IntervalSelectionState extends State<IntervalSelection> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
+          Text(
             'Remind me every',
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-              color: Colors.lightBlue,
+            style: GoogleFonts.rubik(
+              textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: kPrimaryColor),
             ),
           ),
           DropdownButton(
@@ -465,12 +516,13 @@ class _IntervalSelectionState extends State<IntervalSelection> {
             dropdownColor: kScaffoldColor,
             itemHeight: 8.h,
             hint: _selected == 0
-                ? const Text(
-                    'Select an Interval',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold
+                ? Text(
+                    'Select Interval',
+                    style: GoogleFonts.rubik(
+                      textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.red),
                     ),
                   )
                 : null,
@@ -482,9 +534,12 @@ class _IntervalSelectionState extends State<IntervalSelection> {
                   value: value,
                   child: Text(
                     value.toString(),
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          color: kSecondaryColor,
-                        ),
+                    style:GoogleFonts.rubik(
+                  textStyle: const TextStyle(
+                  fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.red),
+                ),
                   ),
                 );
               },
@@ -500,10 +555,11 @@ class _IntervalSelectionState extends State<IntervalSelection> {
           ),
           Text(
             _selected == 1 ? " hour" : " hours",
-            style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-                color: Colors.lightBlue,
+            style: GoogleFonts.rubik(
+              textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: kPrimaryColor),
             ),
           ),
         ],
@@ -596,10 +652,9 @@ class PanelTitle extends StatelessWidget {
             TextSpan(
               text: title,
               style: const TextStyle(
-                fontSize: 14,
-                color: Colors.lightBlue,
-                fontWeight: FontWeight.bold
-              ),
+                  fontSize: 14,
+                  color: Colors.lightBlue,
+                  fontWeight: FontWeight.bold),
             ),
             TextSpan(
               text: isRequired ? " *" : "",
