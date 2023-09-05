@@ -105,7 +105,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                   decoration: const InputDecoration(hintText: 'Dosage in mg'),
                   style: const TextStyle(fontSize: 18),
                 ),
-                Text('Monthly Dose',
+                Text('Total Dose',
                     style: GoogleFonts.rubik(
                       textStyle: const TextStyle(
                           fontSize: 18,

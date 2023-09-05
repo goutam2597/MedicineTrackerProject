@@ -35,6 +35,10 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter-4.2.4" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_wkwebview-3.7.4" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_android-3.9.5" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/geocoding_ios-2.1.0" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/geocoding_android-2.1.2" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/geocoding-2.1.0" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/permission_handler-10.4.3" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
