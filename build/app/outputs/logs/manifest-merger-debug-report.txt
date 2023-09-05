@@ -69,7 +69,6 @@ INJECTED from F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml
 INJECTED from F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:2:1-65:12
 INJECTED from F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:2:1-65:12
 MERGED from F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml:2:1-65:12
-MERGED from [:shared_preferences_android] F:\Medicine-Reminder-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:cloud_firestore] F:\Medicine-Reminder-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-17:12
 MERGED from [:firebase_core] F:\Medicine-Reminder-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-17:12
 MERGED from [:geolocator_android] F:\Medicine-Reminder-main\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-17:12
@@ -79,6 +78,9 @@ MERGED from [:flutter_local_notifications] F:\Medicine-Reminder-main\build\flutt
 MERGED from [:url_launcher_android] F:\Medicine-Reminder-main\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-16:12
 MERGED from [:path_provider_android] F:\Medicine-Reminder-main\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:webview_flutter_android] F:\Medicine-Reminder-main\build\webview_flutter_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:shared_preferences_android] F:\Medicine-Reminder-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:permission_handler_android] F:\Medicine-Reminder-main\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:geocoding_android] F:\Medicine-Reminder-main\build\geocoding_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-analytics-ktx:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\af41fc23262b6f8f1ebbf50ed4197752\transformed\jetified-firebase-analytics-ktx-21.3.0\AndroidManifest.xml:2:1-17:12
 MERGED from [com.google.firebase:firebase-common-ktx:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\1dc2c3ae21ee0cd90c2ece198472cbf7\transformed\jetified-firebase-common-ktx-20.3.3\AndroidManifest.xml:2:1-20:12
 MERGED from [androidx.window:window-java:1.0.0] C:\Users\gouta\.gradle\caches\transforms-3\30b9394f8580ee400dde687a69a464aa\transformed\jetified-window-java-1.0.0\AndroidManifest.xml:17:1-23:12
@@ -168,8 +170,6 @@ uses-sdk
 INJECTED from F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml
 INJECTED from F:\Medicine-Reminder-main\android\app\src\main\AndroidManifest.xml
-MERGED from [:shared_preferences_android] F:\Medicine-Reminder-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:shared_preferences_android] F:\Medicine-Reminder-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:cloud_firestore] F:\Medicine-Reminder-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:cloud_firestore] F:\Medicine-Reminder-main\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:firebase_core] F:\Medicine-Reminder-main\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
@@ -188,6 +188,12 @@ MERGED from [:path_provider_android] F:\Medicine-Reminder-main\build\path_provid
 MERGED from [:path_provider_android] F:\Medicine-Reminder-main\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:webview_flutter_android] F:\Medicine-Reminder-main\build\webview_flutter_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:webview_flutter_android] F:\Medicine-Reminder-main\build\webview_flutter_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:shared_preferences_android] F:\Medicine-Reminder-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:shared_preferences_android] F:\Medicine-Reminder-main\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:permission_handler_android] F:\Medicine-Reminder-main\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:permission_handler_android] F:\Medicine-Reminder-main\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:geocoding_android] F:\Medicine-Reminder-main\build\geocoding_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:geocoding_android] F:\Medicine-Reminder-main\build\geocoding_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-analytics-ktx:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\af41fc23262b6f8f1ebbf50ed4197752\transformed\jetified-firebase-analytics-ktx-21.3.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-analytics-ktx:21.3.0] C:\Users\gouta\.gradle\caches\transforms-3\af41fc23262b6f8f1ebbf50ed4197752\transformed\jetified-firebase-analytics-ktx-21.3.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-common-ktx:20.3.3] C:\Users\gouta\.gradle\caches\transforms-3\1dc2c3ae21ee0cd90c2ece198472cbf7\transformed\jetified-firebase-common-ktx-20.3.3\AndroidManifest.xml:5:5-7:41

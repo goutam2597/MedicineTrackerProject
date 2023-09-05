@@ -17,14 +17,38 @@ class PriceTrackerScreen extends StatefulWidget {
 }
 
 class _PriceTrackerScreenState extends State<PriceTrackerScreen> {
+  TextEditingController searchController = TextEditingController();
+
   CollectionReference referenceMedicinePrice =
       FirebaseFirestore.instance.collection('medicine_price');
   late Stream<QuerySnapshot> streamMedicinePrice;
+
+  List<QueryDocumentSnapshot> listQueryDocumentSnapshot = [];
+  List<QueryDocumentSnapshot> filteredMedicineList = [];
 
   @override
   void initState() {
     super.initState();
     streamMedicinePrice = referenceMedicinePrice.snapshots();
+  }
+
+  void filterMedicineList(String query) {
+    print('Search Query: $query'); // Debug print
+    setState(() {
+      filteredMedicineList = listQueryDocumentSnapshot
+          .where((document) =>
+          (document['name'] as String)
+              .toLowerCase()
+              .contains(query.toLowerCase()))
+          .toList();
+      print('Filtered List Length: ${filteredMedicineList.length}'); // Debug print
+    });
+  }
+  void showSearchBar() {
+    showSearch(
+      context: context,
+      delegate: CustomSearchDelegate(),
+    );
   }
 
   @override
@@ -41,7 +65,12 @@ class _PriceTrackerScreenState extends State<PriceTrackerScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: IconButton(onPressed: (){}, icon: const FaIcon(FontAwesomeIcons.magnifyingGlass,size: 23,)),
+            child: IconButton(
+                onPressed: showSearchBar,
+                icon: const FaIcon(
+                  FontAwesomeIcons.magnifyingGlass,
+                  size: 23,
+                )),
           ),
         ],
       ),
@@ -241,44 +270,111 @@ class _PriceTrackerScreenState extends State<PriceTrackerScreen> {
               itemBuilder: (context, index) {
                 QueryDocumentSnapshot document =
                     listQueryDocumentSnapshot[index];
-                return ListTile(
-                  title: Text(
-                    document['name'],
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Text(
-                            'Group:',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            document['group'],
+                return Column(
+                  children: [
+                    Card(
+                      elevation: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top:8,bottom: 8),
+                        child: ListTile(
+                          title: Text(
+                            (document['name']as String).toUpperCase(),
                             style: const TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w500),
+                                letterSpacing: 1,
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
-                        ],
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 1,
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                    'Generic : ',
+                                    style: TextStyle(
+                                        letterSpacing: 0.2,
+                                        fontSize: 15, fontWeight: FontWeight.w500),
+                                  ),
+                                  Text(
+                                    document['group'],
+                                    style: const TextStyle(
+                                        letterSpacing: 0.2,
+                                        fontSize: 15, fontWeight: FontWeight.w500),
+                                  ),
+                                  const Spacer(),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        'Qty : ',
+                                        style: TextStyle(
+                                            letterSpacing: 0.2,
+                                            color: Colors.black87,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Text(
+                                        document['qty'],
+                                        style: const TextStyle(
+                                            letterSpacing: 0.2,
+                                            color: Colors.black87,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                    'Strengths : ',
+                                    style: TextStyle(
+                                        letterSpacing: 0.2,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black87),
+                                  ),
+                                  Text(
+                                    document['mg'],
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black87),
+                                  ),
+                                  const Spacer(),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        'Price : ',
+                                        style: TextStyle(
+                                            color: kPrimaryColor,
+                                            letterSpacing: 0.2,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Text(
+                                        document['price'],
+                                        style: const TextStyle(
+                                            color: kPrimaryColor,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Text(
-                        document['mg'],
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black87),
-                      ),
-                    ],
-                  ),
-                  trailing: Text(
-                    document['price'],
-                    style: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.w600),
-                  ),
+                    ),
+                  ],
                 );
               },
             );
@@ -286,6 +382,53 @@ class _PriceTrackerScreenState extends State<PriceTrackerScreen> {
           return const Center(child: CircularProgressIndicator());
         },
       ),
+    );
+  }
+}
+
+class CustomSearchDelegate extends SearchDelegate<String> {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, '');
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // Build and display search results here
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return Container();
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final theme = Theme.of(context);
+    return theme.copyWith(
+      primaryColor: kPrimaryColor, // Set your primary color here
+      primaryIconTheme: theme.primaryIconTheme.copyWith(
+        color: Colors.white, // Set icon color to white
+      ), // Ensure contrast with white icons
+      primaryTextTheme: theme.textTheme,
     );
   }
 }

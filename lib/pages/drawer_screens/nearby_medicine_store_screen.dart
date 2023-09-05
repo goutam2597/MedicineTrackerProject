@@ -384,11 +384,20 @@ class _NearbyMedicineStoreScreenState extends State<NearbyMedicineStoreScreen> {
     );
   }
 }
-
 class LocationSearch extends SearchDelegate<String> {
   final Function(String) onSearch;
 
   LocationSearch(this.onSearch);
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return theme.copyWith(
+      appBarTheme: const AppBarTheme(
+        backgroundColor: kPrimaryColor, // Set the background color here
+      ),
+    );
+  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
