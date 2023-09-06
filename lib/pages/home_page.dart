@@ -85,12 +85,6 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: const Color(0xff45B3CB),
         elevation: 2,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(onPressed: (){}, icon: const FaIcon(FontAwesomeIcons.magnifyingGlass,size: 23,)),
-          ),
-        ],
       ),
       drawer: SafeArea(
         child: Drawer(
