@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medicine_reminder/constants.dart';
-import 'package:medicine_reminder/pages/drawer_screens/medicine_tracker_screen.dart';
-import 'package:medicine_reminder/pages/drawer_screens/nearby_medicine_store_screen.dart';
-import 'package:medicine_reminder/pages/drawer_screens/price_tracker.dart';
+import 'package:medicine_reminder/pages/bottom_nav/status_tracker_screen.dart';
+import 'package:medicine_reminder/pages/bottom_nav/nearby_medicine_store_screen.dart';
+import 'package:medicine_reminder/pages/bottom_nav/price_tracker.dart';
 import 'package:medicine_reminder/pages/home_page.dart';
 import 'package:medicine_reminder/pages/new_entry/new_entry_page.dart';
 
@@ -18,13 +18,13 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
   int _selectedScreenIndex = 0;
 
   final List<Widget> _screens = [
-    HomePage(),
-    MedicineTrackerScreen(),
-    PriceTrackerScreen(),
-    NearbyMedicineStoreScreen(),
+    const HomePage(),
+    StatusTrackerScreen(),
+    const PriceTrackerScreen(),
+    const NearbyMedicineStoreScreen(),
   ];
 
-  Widget selectedScreen = HomePage();
+  Widget selectedScreen = const HomePage();
 
   final PageStorageBucket bucket = PageStorageBucket();
 
@@ -32,11 +32,11 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add,size: 40,),
+        child: const Icon(Icons.add,size: 40,),
         onPressed: () {
-          Get.to(NewEntryPage());
+          Get.to(const NewEntryPage());
         },
-        backgroundColor: Color(0xff45B3CB),
+        backgroundColor: const Color(0xff45B3CB),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: PageStorage(
@@ -45,7 +45,7 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: Container(
           child: Padding(
             padding: const EdgeInsets.only(left: 16,right: 16,bottom: 8,top:10),
@@ -57,7 +57,7 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
                     onTap: () {
                       setState(
                         () {
-                          selectedScreen = HomePage();
+                          selectedScreen = const HomePage();
                           _selectedScreenIndex = 0;
                         },
                       );
@@ -71,7 +71,7 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
                       ),
                       child: Icon(
                         Icons.dashboard,
-                        color: _selectedScreenIndex == 0 ? Color(0xff45B3CB) : Colors.grey,
+                        color: _selectedScreenIndex == 0 ? const Color(0xff45B3CB) : Colors.grey,
                       ),
                     ),
                   ),
@@ -80,7 +80,7 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
                   onTap: () {
                     setState(
                       () {
-                        selectedScreen = MedicineTrackerScreen();
+                        selectedScreen = StatusTrackerScreen();
                         _selectedScreenIndex = 1;
                       },
                     );
@@ -94,18 +94,18 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
                     ),
                     child: Icon(
                       Icons.add_chart,
-                      color: _selectedScreenIndex == 1 ? Color(0xff45B3CB) : Colors.grey,
+                      color: _selectedScreenIndex == 1 ? const Color(0xff45B3CB) : Colors.grey,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 35,
                 ),
                 GestureDetector(
                   onTap: () {
                     setState(
                       () {
-                        selectedScreen = PriceTrackerScreen();
+                        selectedScreen = const PriceTrackerScreen();
                         _selectedScreenIndex = 2;
                       },
                     );
@@ -119,7 +119,7 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
                     ),
                     child: Icon(
                       Icons.currency_exchange_outlined,
-                      color: _selectedScreenIndex == 2 ? Color(0xff45B3CB) : Colors.grey,
+                      color: _selectedScreenIndex == 2 ? const Color(0xff45B3CB) : Colors.grey,
                     ),
                   ),
                 ),
@@ -127,7 +127,7 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
                   onTap: () {
                     setState(
                       () {
-                        selectedScreen = NearbyMedicineStoreScreen();
+                        selectedScreen = const NearbyMedicineStoreScreen();
                         _selectedScreenIndex = 3;
                       },
                     );
@@ -141,7 +141,7 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
                     ),
                     child: Icon(
                       Icons.location_on_outlined,
-                      color: _selectedScreenIndex == 3 ? Color(0xff45B3CB) : Colors.grey,
+                      color: _selectedScreenIndex == 3 ? const Color(0xff45B3CB) : Colors.grey,
                     ),
                   ),
                 ),

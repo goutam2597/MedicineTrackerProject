@@ -6,13 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:medicine_reminder/constants.dart';
 import 'package:medicine_reminder/global_bloc.dart';
 import 'package:medicine_reminder/models/medicine.dart';
+import 'package:medicine_reminder/pages/bottom_nav/nearby_medicine_store_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/buy_medicine_online_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/medicine_donation_networks.dart';
-import 'package:medicine_reminder/pages/drawer_screens/medicine_tracker_screen.dart';
-import 'package:medicine_reminder/pages/drawer_screens/nearby_medicine_store_screen.dart';
-import 'package:medicine_reminder/pages/drawer_screens/price_tracker.dart';
+import 'package:medicine_reminder/pages/bottom_nav/status_tracker_screen.dart';
+import 'package:medicine_reminder/pages/bottom_nav/price_tracker.dart';
 import 'package:medicine_reminder/pages/medicine_details/medicine_details.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,6 +24,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+
+  int totalDose = 0;
+  int dailyDose = 0;
+  int remainingDose = 0;
+  int remainingDays = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    loadSavedData();
+  }
+
+  void loadSavedData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      setState(() {
+        totalDose = prefs.getInt('totalDose') ?? 0;
+        dailyDose = prefs.getInt('dailyDose') ?? 0;
+        remainingDose = totalDose - _getTakenDoseCount(prefs);
+        remainingDays = (remainingDose / dailyDose).ceil();
+      });
+    } catch (e) {
+      print("Error loading data from SharedPreferences: $e");
+    }
+  }
+
+  int _getTakenDoseCount(SharedPreferences prefs) {
+    int takenCount = 0;
+    for (int i = 0; i < totalDose; i++) {
+      final isTaken = prefs.getBool('day_$i') ?? false;
+      if (isTaken) {
+        takenCount++;
+      }
+    }
+    return takenCount;
+  }
+
 
 
   @override
@@ -83,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(const MedicineTrackerScreen());
+                  Get.to(StatusTrackerScreen());
                 },
               ),
               const Divider(
@@ -233,6 +272,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const TopContainer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Remaining Doses: $remainingDose'),
+                Text('Remaining Days: $remainingDays'),
+              ],
+            ),
             SizedBox(
               height: 2.h,
             ),
@@ -251,7 +297,6 @@ class TopContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalBloc globalBloc = Provider.of<GlobalBloc>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -281,25 +326,26 @@ class TopContainer extends StatelessWidget {
                 fontSize: 18),
           ),
         ),
+
         SizedBox(
           height: 2.h,
         ),
         //lets show number of saved medicines from shared preferences
-        StreamBuilder<List<Medicine>>(
-            stream: globalBloc.medicineList$,
-            builder: (context, snapshot) {
-              return Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(bottom: 1.h),
-                child: Text(
-                  !snapshot.hasData ? '0' : snapshot.data!.length.toString(),
-                  style: const TextStyle(
-                      fontSize: 50,
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.bold),
-                ),
-              );
-            }),
+        // StreamBuilder<List<Medicine>>(
+        //     stream: globalBloc.medicineList$,
+        //     builder: (context, snapshot) {
+        //       return Container(
+        //         alignment: Alignment.center,
+        //         padding: EdgeInsets.only(bottom: 1.h),
+        //         child: Text(
+        //           !snapshot.hasData ? '0' : snapshot.data!.length.toString(),
+        //           style: const TextStyle(
+        //               fontSize: 50,
+        //               color: kPrimaryColor,
+        //               fontWeight: FontWeight.bold),
+        //         ),
+        //       );
+        //     }),
       ],
     );
   }
