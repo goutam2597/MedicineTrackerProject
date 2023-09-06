@@ -5,7 +5,7 @@
     <!-- Permissions for Notifications -->
 
     <application
-        android:label="medicine_reminder"
+        android:label="Medicine Tracker"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

@@ -12,7 +12,6 @@ class SuccessScreen extends StatefulWidget {
 class _SuccessScreenState extends State<SuccessScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Timer(const Duration(milliseconds: 2500), () {
       Navigator.popUntil(context, ModalRoute.withName('/'));
@@ -28,7 +27,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
           'assets/animations/Success Check.flr',
           alignment: Alignment.center,
           fit: BoxFit.contain,
-          animation: 'Untitiled',
+          animation: 'Untitled',
         ),
       ),
     );

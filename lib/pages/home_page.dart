@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,15 +8,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:medicine_reminder/constants.dart';
 import 'package:medicine_reminder/global_bloc.dart';
 import 'package:medicine_reminder/models/medicine.dart';
-import 'package:medicine_reminder/pages/bottom_nav/nearby_medicine_store_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/about_us_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/ambulance_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/buy_medicine_online_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/first_aids_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/medicine_donation_networks.dart';
-import 'package:medicine_reminder/pages/bottom_nav/status_tracker_screen.dart';
-import 'package:medicine_reminder/pages/bottom_nav/price_tracker.dart';
+import 'package:medicine_reminder/pages/drawer_screens/medicine_side_effects_screen.dart';
 import 'package:medicine_reminder/pages/medicine_details/medicine_details.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,6 +28,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  Uri dialNumber = Uri(scheme: 'tel',path: '12345678901');
+
+  callNumber()async{
+    await launchUrl(dialNumber);
+  }
 
 
   int totalDose = 0;
@@ -47,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         remainingDays = (remainingDose / dailyDose).ceil();
       });
     } catch (e) {
-      print("Error loading data from SharedPreferences: $e");
+      log("Error loading data from SharedPreferences: $e" as num);
     }
   }
 
@@ -111,56 +121,19 @@ class _HomePageState extends State<HomePage> {
               ),
               ListTile(
                 title: const Text(
-                  'Medicine Tracker',
+                  'First Aid Medicines',
                   style: TextStyle(
                     color: Colors.black54,
                   ),
                 ),
-                leading: const Icon(
-                  Icons.add_chart,
+                leading: const FaIcon(
+                  FontAwesomeIcons.briefcaseMedical,
                   color: kPrimaryColor,
+                  size: 25,
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(StatusTrackerScreen());
-                },
-              ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
-              ListTile(
-                title: const Text(
-                  'Medicine Search',
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                ),
-                leading: const Icon(
-                  Icons.search,
-                  color: kPrimaryColor
-                ),
-                horizontalTitleGap: 0,
-                onTap: () {},
-              ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
-              ListTile(
-                title: const Text(
-                  'Price Tracker',
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                ),
-                leading: const Icon(
-                  Icons.currency_exchange_outlined,
-                  color: kPrimaryColor
-                ),
-                horizontalTitleGap: 0,
-                onTap: () {
-                  Get.to(const PriceTrackerScreen());
+                  Get.to(const FirstAidsScreen());
                 },
               ),
               const Divider(
@@ -179,27 +152,10 @@ class _HomePageState extends State<HomePage> {
                   color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
-                onTap: () {},
+                onTap: () {
+                  Get.to(const MedicineSideEffectsScreen());
+                },
               ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
-              ListTile(
-                  title: const Text(
-                    'Nearby Medicine Shop',
-                    style: TextStyle(
-                      color: Colors.black54,
-                    ),
-                  ),
-                  leading: const Icon(
-                    Icons.local_convenience_store,
-                    color:kPrimaryColor,
-                  ),
-                  horizontalTitleGap: 0,
-                  onTap: () {
-                    Get.to(const NearbyMedicineStoreScreen());
-                  }),
               const Divider(
                 thickness: 1,
                 height: 8,
@@ -217,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(const BuyMedicineOnline());
+                  Get.to( BuyMedicineOnline());
                 },
               ),
               const Divider(
@@ -237,7 +193,45 @@ class _HomePageState extends State<HomePage> {
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(const MedicineDonationNetworks());
+                  Get.to(MedicineDonationNetworks());
+                },
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Call For Medicine',
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                leading: const FaIcon(
+                  FontAwesomeIcons.phone,
+                  color: kPrimaryColor,
+                ),
+                horizontalTitleGap: 0,
+                onTap: callNumber,
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Call Ambulance',
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                leading: const FaIcon(
+                  FontAwesomeIcons.truckMedical,
+                  color: kPrimaryColor,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {
+                  Get.to( const AmbulanceScreen());
                 },
               ),
               const Divider(
@@ -253,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                 title: const Text(
                   'About Us',
                   style: TextStyle(
-                    color: kPrimaryColor,
+                    color: Colors.black54,
                   ),
                 ),
                 leading: const Icon(
@@ -261,7 +255,9 @@ class _HomePageState extends State<HomePage> {
                   color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
-                onTap: () {},
+                onTap: () {
+                  Get.to(const AboutUsScreen());
+                },
               ),
             ],
           ),
@@ -270,13 +266,19 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: EdgeInsets.all(2.h),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const TopContainer(),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Remaining Doses: $remainingDose'),
-                Text('Remaining Days: $remainingDays'),
+                Text('Total Doses: $totalDose',style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: kPrimaryColor),),
+                const SizedBox(height: 5,),
+                Text('Remaining Doses: $remainingDose',style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: kPrimaryColor),),
+                const SizedBox(height: 5,),
+                Text('Remaining Days: $remainingDays',style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: kPrimaryColor),),
               ],
             ),
             SizedBox(
@@ -403,7 +405,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/bottle.svg',
           height: 7.h,
-          color: kPrimaryColor,
+          color: Colors.white,
         ),
       );
     } else if (medicine.medicineType == 'Pill') {
@@ -412,7 +414,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/pill.svg',
           height: 7.h,
-          color: kPrimaryColor,
+          color: Colors.white,
         ),
       );
     } else if (medicine.medicineType == 'Syringe') {
@@ -421,7 +423,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/syringe.svg',
           height: 7.h,
-          color: kPrimaryColor,
+          color: Colors.white,
         ),
       );
     } else if (medicine.medicineType == 'Tablet') {
@@ -430,7 +432,7 @@ class MedicineCard extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/tablet.svg',
           height: 7.h,
-          color: kPrimaryColor,
+          color: Colors.white,
         ),
       );
     }
@@ -438,7 +440,7 @@ class MedicineCard extends StatelessWidget {
       tag: medicine.medicineName! + medicine.medicineType!,
       child: Icon(
         Icons.error,
-        color: kOtherColor,
+        color: Colors.white,
         size: size,
       ),
     );
@@ -472,39 +474,35 @@ class MedicineCard extends StatelessWidget {
         padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 1.h, bottom: 1.h),
         margin: EdgeInsets.all(1.h),
         decoration: BoxDecoration(
-          color: sBgColor,
+          color: kShadowBgColor,
           borderRadius: BorderRadius.circular(2.h),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            //call the function here icon type
-            //later we will the icon issue
             makeIcon(7.h),
             const Spacer(),
-            //hero tag animation, later
             Hero(
               tag: medicine.medicineName!,
               child: Text(
                 medicine.medicineName!,
                 overflow: TextOverflow.fade,
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: const TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500),
               ),
             ),
             SizedBox(
               height: 0.3.h,
             ),
-            //time interval data with condition, later
             Text(
               medicine.interval == 1
                   ? "Every ${medicine.interval} hour"
                   : "Every ${medicine.interval} hour",
               overflow: TextOverflow.fade,
               textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.bodySmall,
+              style: const TextStyle(color: Colors.white),
             ),
           ],
         ),

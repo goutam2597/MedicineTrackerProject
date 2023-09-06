@@ -1,21 +1,35 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medicine_reminder/constants.dart';
-import 'package:medicine_reminder/pages/bottom_nav/nearby_medicine_store_screen.dart';
-import 'package:medicine_reminder/pages/bottom_nav/price_tracker.dart';
+import 'package:medicine_reminder/pages/drawer_screens/about_us_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/ambulance_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/buy_medicine_online_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/first_aids_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/medicine_donation_networks.dart';
-import 'package:medicine_reminder/pages/status_tracker/floating_action_button_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/medicine_side_effects_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StatusTrackerScreen extends StatefulWidget {
+  const StatusTrackerScreen({super.key});
+
   @override
-  _StatusTrackerScreenState createState() => _StatusTrackerScreenState();
+  StatusTrackerScreenState createState() => StatusTrackerScreenState();
 }
 
-class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
+class StatusTrackerScreenState extends State<StatusTrackerScreen> {
+
+
+  Uri dialNumber = Uri(scheme: 'tel',path: '12345678901');
+
+  callNumber()async{
+    await launchUrl(dialNumber);
+  }
+
   int totalDose = 0;
   int dailyDose = 0;
   List<bool> doseTaken = [];
@@ -25,7 +39,6 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
     super.initState();
     loadSavedData();
   }
-
 
   void loadSavedData() async {
     try {
@@ -37,7 +50,7 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
             totalDose, (index) => prefs.getBool('day_$index') ?? false);
       });
     } catch (e) {
-      print("Error loading data from SharedPreferences: $e");
+      log("Error loading data from SharedPreferences: $e");
     }
   }
 
@@ -48,24 +61,24 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
         prefs.setBool('day_$i', doseTaken[i]);
       }
     } catch (e) {
-      print("Error saving data to SharedPreferences: $e");
+      log("Error saving data to SharedPreferences: $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic>? args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final Map<String, dynamic>? args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
     if (args != null) {
       totalDose = args['totalDose'] ?? 0;
       dailyDose = args['dailyDose'] ?? 0;
     }
 
-    print('totalDose: $totalDose');
-    print('doseTaken length: ${doseTaken.length}');
+    log('totalDose: $totalDose');
+    log('doseTaken length: ${doseTaken.length}');
 
     return Scaffold(
-
       appBar: AppBar(
         title: Text(
           'Status Tracker',
@@ -102,37 +115,21 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
                   ),
                 ),
               ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
               ListTile(
                 title: const Text(
-                  'Medicine Search',
+                  'First Aid Medicines',
                   style: TextStyle(
                     color: Colors.black54,
                   ),
                 ),
-                leading: const Icon(Icons.search, color: kPrimaryColor),
-                horizontalTitleGap: 0,
-                onTap: () {},
-              ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
-              ListTile(
-                title: const Text(
-                  'Price Tracker',
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
+                leading: const FaIcon(
+                  FontAwesomeIcons.briefcaseMedical,
+                  color: kPrimaryColor,
+                  size: 25,
                 ),
-                leading: const Icon(Icons.currency_exchange_outlined,
-                    color: kPrimaryColor),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(const PriceTrackerScreen());
+                  Get.to(const FirstAidsScreen());
                 },
               ),
               const Divider(
@@ -151,27 +148,10 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
                   color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
-                onTap: () {},
+                onTap: () {
+                  Get.to(const MedicineSideEffectsScreen());
+                },
               ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
-              ListTile(
-                  title: const Text(
-                    'Nearby Medicine Shop',
-                    style: TextStyle(
-                      color: Colors.black54,
-                    ),
-                  ),
-                  leading: const Icon(
-                    Icons.local_convenience_store,
-                    color: kPrimaryColor,
-                  ),
-                  horizontalTitleGap: 0,
-                  onTap: () {
-                    Get.to(const NearbyMedicineStoreScreen());
-                  }),
               const Divider(
                 thickness: 1,
                 height: 8,
@@ -189,7 +169,7 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(const BuyMedicineOnline());
+                  Get.to( BuyMedicineOnline());
                 },
               ),
               const Divider(
@@ -209,7 +189,45 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(const MedicineDonationNetworks());
+                  Get.to( MedicineDonationNetworks());
+                },
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Call For Medicine',
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                leading: const FaIcon(
+                  FontAwesomeIcons.phone,
+                  color: kPrimaryColor,
+                ),
+                horizontalTitleGap: 0,
+                onTap: callNumber,
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Call Ambulance',
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                leading: const FaIcon(
+                  FontAwesomeIcons.truckMedical,
+                  color: kPrimaryColor,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {
+                  Get.to( const AmbulanceScreen());
                 },
               ),
               const Divider(
@@ -225,7 +243,7 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
                 title: const Text(
                   'About Us',
                   style: TextStyle(
-                    color: kPrimaryColor,
+                    color: Colors.black54,
                   ),
                 ),
                 leading: const Icon(
@@ -233,39 +251,39 @@ class _StatusTrackerScreenState extends State<StatusTrackerScreen> {
                   color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
-                onTap: () {},
+                onTap: () {
+                  Get.to(const AboutUsScreen());
+                },
               ),
             ],
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: totalDose,
-        itemBuilder: (context, index) {
-          print('Accessing index $index');
-          return Card(
-            child: ListTile(
-              title: Text('Dose ${index + 1}'),
-              trailing: Checkbox(
-                value: doseTaken[index],
-                onChanged: (value) {
-                  setState(() {
-                    doseTaken[index] = value!;
-                    saveData(); // Save the updated data when the checkbox is changed
-                  });
-                },
-              ),
+      body: totalDose > 0
+          ? ListView.builder(
+              itemCount: totalDose,
+              itemBuilder: (context, index) {
+                log('Accessing index $index');
+                return Card(
+                  child: ListTile(
+                    title: Text('Dose Number :  ${index + 1}'),
+                    trailing: Checkbox(
+                      activeColor: kPrimaryColor,
+                      value: doseTaken[index],
+                      onChanged: (value) {
+                        setState(() {
+                          doseTaken[index] = value!;
+                          saveData();
+                        });
+                      },
+                    ),
+                  ),
+                );
+              },
+            )
+          : const Center(
+              child: Text('No doses to display.'),
             ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: kPrimaryColor,
-        onPressed: (){
-          Get.to(FabFormField());
-        },
-        child: const Icon(Icons.add,size: 40,),
-      ),
     );
   }
 }

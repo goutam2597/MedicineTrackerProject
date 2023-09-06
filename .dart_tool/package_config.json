@@ -603,7 +603,7 @@
     },
     {
       "name": "url_launcher",
-      "rootUri": "file:///C:/Users/gouta/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.1.12",
+      "rootUri": "file:///C:/Users/gouta/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.1.14",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -728,7 +728,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-09-05T18:15:33.613349Z",
+  "generated": "2023-09-06T17:55:04.393902Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }

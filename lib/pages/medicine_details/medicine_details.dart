@@ -17,7 +17,7 @@ class MedicineDetails extends StatefulWidget {
 class _MedicineDetailsState extends State<MedicineDetails> {
   @override
   Widget build(BuildContext context) {
-    final GlobalBloc _globalBloc = Provider.of<GlobalBloc>(context);
+    final GlobalBloc globalBloc = Provider.of<GlobalBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Details'),
@@ -38,7 +38,7 @@ class _MedicineDetailsState extends State<MedicineDetails> {
                   shape: const StadiumBorder(),
                 ),
                 onPressed: () {
-                  openAlertBox(context, _globalBloc);
+                  openAlertBox(context, globalBloc);
                 },
                 child: Text(
                   'Delete',
@@ -59,7 +59,7 @@ class _MedicineDetailsState extends State<MedicineDetails> {
   }
   //lets delete a medicine from memory
 
-  openAlertBox(BuildContext context, GlobalBloc _globalBloc) {
+  openAlertBox(BuildContext context, GlobalBloc globalBloc) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -90,7 +90,7 @@ class _MedicineDetailsState extends State<MedicineDetails> {
             TextButton(
               onPressed: () {
                 //global block to delete medicine,later
-                _globalBloc.removeMedicine(widget.medicine);
+                globalBloc.removeMedicine(widget.medicine);
                 Navigator.popUntil(context, ModalRoute.withName('/'));
               },
               child: Text(
@@ -117,8 +117,8 @@ class MainSection extends StatelessWidget {
         tag: medicine!.medicineName! + medicine!.medicineType!,
         child: SvgPicture.asset(
           'assets/icons/bottle.svg',
-          color: kOtherColor,
-          height: 7.h,
+          color: Colors.white,
+          height: 10.h,
         ),
       );
     } else if (medicine!.medicineType == 'Pill') {
@@ -126,8 +126,8 @@ class MainSection extends StatelessWidget {
         tag: medicine!.medicineName! + medicine!.medicineType!,
         child: SvgPicture.asset(
           'assets/icons/pill.svg',
-          color: kOtherColor,
-          height: 7.h,
+          color: Colors.white,
+          height: 10.h,
         ),
       );
     } else if (medicine!.medicineType == 'Syringe') {
@@ -135,8 +135,8 @@ class MainSection extends StatelessWidget {
         tag: medicine!.medicineName! + medicine!.medicineType!,
         child: SvgPicture.asset(
           'assets/icons/syringe.svg',
-          color: kOtherColor,
-          height: 7.h,
+          color: Colors.white,
+          height: 10.h,
         ),
       );
     } else if (medicine!.medicineType == 'Tablet') {
@@ -144,8 +144,8 @@ class MainSection extends StatelessWidget {
         tag: medicine!.medicineName! + medicine!.medicineType!,
         child: SvgPicture.asset(
           'assets/icons/tablet.svg',
-          color: kOtherColor,
-          height: 7.h,
+          color: Colors.white,
+          height: 10.h,
         ),
       );
     }
@@ -163,9 +163,15 @@ class MainSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        makeIcon(7.h),
+        Container(
+          padding: const EdgeInsets.all(40),
+            decoration: BoxDecoration(
+              color: kShadowBgColor,
+              borderRadius: BorderRadius.circular(2.h),
+            ),
+            child: makeIcon(7.h)),
         SizedBox(
           width: 2.w,
         ),
@@ -209,7 +215,7 @@ class MainInfoTab extends StatelessWidget {
           children: [
             Text(
               fieldTitle,
-              style: Theme.of(context).textTheme.titleSmall,
+              style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
             ),
             SizedBox(
               height: 0.3.h,
@@ -272,16 +278,12 @@ class ExtendedInfoTab extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 1.h),
             child: Text(
               fieldTitle,
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: kTextColor,
-                  ),
+              style:const TextStyle(fontWeight: FontWeight.w500,fontSize: 18,color: kPrimaryColor),
             ),
           ),
           Text(
             fieldInfo,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: kTextLightColor,
-                ),
+            style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 16,color: Colors.black87),
           ),
         ],
       ),

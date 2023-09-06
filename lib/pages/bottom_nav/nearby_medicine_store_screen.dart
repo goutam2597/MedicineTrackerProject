@@ -7,11 +7,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medicine_reminder/constants.dart';
+import 'package:medicine_reminder/pages/drawer_screens/about_us_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/ambulance_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/buy_medicine_online_screen.dart';
+import 'package:medicine_reminder/pages/drawer_screens/first_aids_screen.dart';
 import 'package:medicine_reminder/pages/drawer_screens/medicine_donation_networks.dart';
-import 'package:medicine_reminder/pages/bottom_nav/price_tracker.dart';
+import 'package:medicine_reminder/pages/drawer_screens/medicine_side_effects_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../bottom_nav/status_tracker_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NearbyMedicineStoreScreen extends StatefulWidget {
   const NearbyMedicineStoreScreen({super.key});
@@ -22,6 +25,13 @@ class NearbyMedicineStoreScreen extends StatefulWidget {
 }
 
 class _NearbyMedicineStoreScreenState extends State<NearbyMedicineStoreScreen> {
+  Uri dialNumber = Uri(scheme: 'tel',path: '12345678901');
+
+  callNumber()async{
+    await launchUrl(dialNumber);
+  }
+
+
   final Set<Marker> _markers = {};
   late GoogleMapController _mapController;
   late LatLng _userLocation = const LatLng(0, 0);
@@ -214,51 +224,19 @@ class _NearbyMedicineStoreScreenState extends State<NearbyMedicineStoreScreen> {
               ),
               ListTile(
                 title: const Text(
-                  'Medicine Tracker',
+                  'First Aid Medicines',
                   style: TextStyle(
                     color: Colors.black54,
                   ),
                 ),
-                leading: const Icon(
-                  Icons.add_chart,
+                leading: const FaIcon(
+                  FontAwesomeIcons.briefcaseMedical,
                   color: kPrimaryColor,
+                  size: 25,
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(StatusTrackerScreen());
-                },
-              ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
-              ListTile(
-                title: const Text(
-                  'Medicine Search',
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                ),
-                leading: const Icon(Icons.search, color: kPrimaryColor),
-                horizontalTitleGap: 0,
-                onTap: () {},
-              ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
-              ListTile(
-                title: const Text(
-                  'Price Tracker',
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                ),
-                leading: const Icon(Icons.currency_exchange_outlined,
-                    color: kPrimaryColor),
-                horizontalTitleGap: 0,
-                onTap: () {
-                  Get.to(const PriceTrackerScreen());
+                  Get.to(const FirstAidsScreen());
                 },
               ),
               const Divider(
@@ -277,27 +255,10 @@ class _NearbyMedicineStoreScreenState extends State<NearbyMedicineStoreScreen> {
                   color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
-                onTap: () {},
+                onTap: () {
+                  Get.to(const MedicineSideEffectsScreen());
+                },
               ),
-              const Divider(
-                thickness: 1,
-                height: 8,
-              ),
-              ListTile(
-                  title: const Text(
-                    'Nearby Medicine Shop',
-                    style: TextStyle(
-                      color: Colors.black54,
-                    ),
-                  ),
-                  leading: const Icon(
-                    Icons.local_convenience_store,
-                    color: kPrimaryColor,
-                  ),
-                  horizontalTitleGap: 0,
-                  onTap: () {
-                    Get.to(const NearbyMedicineStoreScreen());
-                  }),
               const Divider(
                 thickness: 1,
                 height: 8,
@@ -315,7 +276,7 @@ class _NearbyMedicineStoreScreenState extends State<NearbyMedicineStoreScreen> {
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(const BuyMedicineOnline());
+                  Get.to( BuyMedicineOnline());
                 },
               ),
               const Divider(
@@ -335,7 +296,45 @@ class _NearbyMedicineStoreScreenState extends State<NearbyMedicineStoreScreen> {
                 ),
                 horizontalTitleGap: 0,
                 onTap: () {
-                  Get.to(const MedicineDonationNetworks());
+                  Get.to( MedicineDonationNetworks());
+                },
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Call For Medicine',
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                leading: const FaIcon(
+                  FontAwesomeIcons.phone,
+                  color: kPrimaryColor,
+                ),
+                horizontalTitleGap: 0,
+                onTap:callNumber,
+              ),
+              const Divider(
+                thickness: 1,
+                height: 8,
+              ),
+              ListTile(
+                title: const Text(
+                  'Call Ambulance',
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                leading: const FaIcon(
+                  FontAwesomeIcons.truckMedical,
+                  color: kPrimaryColor,
+                ),
+                horizontalTitleGap: 0,
+                onTap: () {
+                  Get.to( const AmbulanceScreen());
                 },
               ),
               const Divider(
@@ -351,7 +350,7 @@ class _NearbyMedicineStoreScreenState extends State<NearbyMedicineStoreScreen> {
                 title: const Text(
                   'About Us',
                   style: TextStyle(
-                    color: kPrimaryColor,
+                    color: Colors.black54,
                   ),
                 ),
                 leading: const Icon(
@@ -359,7 +358,9 @@ class _NearbyMedicineStoreScreenState extends State<NearbyMedicineStoreScreen> {
                   color: kPrimaryColor,
                 ),
                 horizontalTitleGap: 0,
-                onTap: () {},
+                onTap: () {
+                  Get.to(const AboutUsScreen());
+                },
               ),
             ],
           ),

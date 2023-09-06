@@ -11,6 +11,7 @@ import 'package:medicine_reminder/models/medicine.dart';
 import 'package:medicine_reminder/pages/home_page.dart';
 import 'package:medicine_reminder/pages/new_entry/new_entry_bloc.dart';
 import 'package:medicine_reminder/pages/success_screen/success_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
 import '../../common/convert_time.dart';
@@ -50,6 +51,24 @@ class _NewEntryPageState extends State<NewEntryPage> {
     _scaffoldKey = GlobalKey<ScaffoldState>();
     initializeNotifications();
     initializeErrorListen();
+    loadSavedData();
+  }
+
+  int totalDose = 0;
+  int dailyDose = 0;
+
+  void loadSavedData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      totalDose = prefs.getInt('totalDose') ?? 0;
+      dailyDose = prefs.getInt('dailyDose') ?? 0;
+    });
+  }
+
+  void saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('totalDose', totalDose);
+    prefs.setInt('dailyDose', dailyDose);
   }
 
   @override
@@ -105,25 +124,52 @@ class _NewEntryPageState extends State<NewEntryPage> {
                   decoration: const InputDecoration(hintText: 'Dosage in mg'),
                   style: const TextStyle(fontSize: 18),
                 ),
-                Text('Total Dose',
-                    style: GoogleFonts.rubik(
-                      textStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: kPrimaryColor),
-                    )),
+                Text('Total Number of Doses',
+                  style: GoogleFonts.rubik(
+                    textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: kPrimaryColor),
+                  ),),
+                const SizedBox(
+                  height: 5,
+                ),
+
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(hintText: 'Total Doses'),
+                  style: const TextStyle(fontSize: 18),
+                  onChanged: (value) {
+                    setState(() {
+                      totalDose = int.tryParse(value) ?? 0;
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+                Text('Daily Dose Count',
+                  style: GoogleFonts.rubik(
+                    textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: kPrimaryColor),
+                  ),),
                 const SizedBox(
                   height: 5,
                 ),
                 TextFormField(
-                  maxLength: 12,
-                  textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(hintText: 'Dose Count'),
+                  decoration: const InputDecoration(hintText: 'Daily Dose'),
                   style: const TextStyle(fontSize: 18),
+                  onChanged: (value) {
+                    setState(() {
+                      dailyDose = int.tryParse(value) ?? 0;
+                    });
+                  },
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 18,
                 ),
                 Text('Medicine Type',
                     style: GoogleFonts.rubik(
@@ -272,10 +318,19 @@ class _NewEntryPageState extends State<NewEntryPage> {
 
                       scheduleNotification(newEntryMedicine);
 
+                      saveData();
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SuccessScreen()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SuccessScreen(),
+                          settings: RouteSettings(
+                            arguments: {
+                              'totalDose': totalDose,
+                              'dailyDose': dailyDose,
+                            },
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),

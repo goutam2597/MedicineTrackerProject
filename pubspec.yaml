@@ -46,7 +46,7 @@ dependencies:
   flutter_local_notifications: ^15.1.0+1
   get: ^4.6.5
   font_awesome_flutter: ^10.5.0
-  url_launcher: ^6.1.12
+  url_launcher: ^6.1.14
   timezone: ^0.9.2
   firebase_core: ^2.15.1
   cloud_firestore: ^4.9.0
@@ -85,6 +85,9 @@ flutter:
     - assets/icons/
     - assets/animations/
     - assets/sound/
+    - assets/logo/
+    - assets/ecomlogo/
+    - assets/images/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
